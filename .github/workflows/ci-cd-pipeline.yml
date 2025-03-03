@@ -23,7 +23,6 @@ jobs:
       - name: Run Tests
         run: python -m unittest discover
 
-
   docker:
     needs: build
     runs-on: ubuntu-latest
