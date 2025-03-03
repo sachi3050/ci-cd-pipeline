@@ -34,10 +34,10 @@ jobs:
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t your-dockerhub-username/ci-cd-app:latest .
+        run: docker build -t sachidananda06/ci-cd-app:latest .
 
       - name: Push Docker Image to DockerHub
-        run: docker push your-dockerhub-username/ci-cd-app:latest
+        run: docker push sachidananda06/ci-cd-app:latest
 
   deploy:
     needs: docker
