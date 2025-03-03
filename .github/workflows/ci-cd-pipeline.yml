@@ -50,7 +50,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker pull your-dockerhub-username/ci-cd-app:latest
+            docker pull sachidananda06/ci-cd-app:latest
             docker stop my_app || true
             docker rm my_app || true
-            docker run -d -p 80:5000 --name my_app your-dockerhub-username/ci-cd-app:latest
+            docker run -d -p 80:5000 --name my_app sachidananda06/ci-cd-app:latest
