@@ -5,7 +5,10 @@ FROM python:3.9
 WORKDIR /app
 
 # Copy application files
-COPY . .
+COPY . /app
+
+# Ensure static files are present
+RUN mkdir -p /app/static && cp static/image.jpg /app/static/
 
 # Install dependencies
 RUN pip install -r requirements.txt
@@ -15,4 +18,3 @@ EXPOSE 5000
 
 # Run the application
 CMD ["python", "app.py"]
-
