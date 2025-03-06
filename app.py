@@ -10,5 +10,6 @@ def home():
     <img src="/static/image.jpg" alt="Birthday Image" width="400">
     """
 
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
