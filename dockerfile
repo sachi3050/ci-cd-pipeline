@@ -5,13 +5,13 @@ FROM python:3.9
 WORKDIR /app
 
 # Copy application files
-COPY . /app
+COPY . .
 
-# Ensure static files are present
-RUN mkdir -p /app/static && cp static/image.jpg /app/static/
+# Ensure static files are copied correctly
+COPY static/ /app/static/
 
 # Install dependencies
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose port 5000
 EXPOSE 5000
