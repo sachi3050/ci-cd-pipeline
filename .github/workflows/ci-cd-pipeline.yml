@@ -51,5 +51,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             docker pull sachidananda06/ci-cd-app:latest
+            docker stop my_app || true
+            docker rm my_app || true
            
             docker run -d -p 80:5000 --name my_app sachidananda06/ci-cd-app:latest
