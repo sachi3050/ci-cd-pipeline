@@ -1,0 +1,54 @@
+#run inside a venv (Recommended)
+pipeline {
+    agent any
+    
+    tools {
+        maven "maven3"
+    }
+
+    stages {
+        stage('Git Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/sachi3050/ci-cd-pipeline.git'
+            }
+        }   
+        stage('Setup Python & Install Dependencies') {
+            steps {
+                sh '''
+                python3 --version
+                pip3 install -r requirements.txt
+                '''
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                sh 'python3 -m unittest discover'
+            }
+        }
+        stage('Docker build') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred') {
+                        sh "docker build -t sachidananda06/mandi:latest ."
+                    }
+                }
+            }
+        }
+        
+        stage('Trivy Image Scan') {
+            steps {
+                sh "trivy image --format table -o image.html sachidananda06/mandi:latest"
+            }
+        }
+        
+        stage('Docker Push Image') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred') {
+                        sh "docker push sachidananda06/mandi:latest"
+                    }
+                }
+            }
+        }
+    }
+}
