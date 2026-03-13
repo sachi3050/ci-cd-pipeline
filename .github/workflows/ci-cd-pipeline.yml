@@ -54,4 +54,4 @@ jobs:
             docker stop my_app || true
             docker rm my_app || true
            
-            docker run -d -p 80:5000 --name my_app sachidananda06/ci-cd-app:latest
+            docker run -d -p 5000:5000 --name my_app sachidananda06/ci-cd-app:latest
